@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var Products_1 = require("../Controllers/Products");
+var User_1 = require("../Middlewares/User");
+var router = (0, express_1.Router)();
+router.post('/products', Products_1.createProductController);
+router.post('/product/view', Products_1.increaseProductView);
+router.post('/product/fav', User_1.mustBeAuthenticated, Products_1.addProductToFavorites);
+router.get('/product/:id', Products_1.findProductController);
+router.get('/product/search/:tag', Products_1.searchProductsController);
+router.get('/recentproducts/', Products_1.getRecentProductsController);
+router.get('/recentproducts/:id', Products_1.getRecentProductsController);
+router.get('/products/', Products_1.getProductsController);
+router.get('/products/:skip', Products_1.getProductsController);
+router.get('/products/:category/:skip', Products_1.getProductsController);
+router.get('/products/:category/:subCategory/:skip', Products_1.getProductsController);
+exports.default = router;
